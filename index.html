@@ -3,1196 +3,283 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>PHANTOM 4D | Fitness Reimagined</title>
+<title>Gaming Demo</title>
 
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
-:root {
-  --bg: #f1f0ec;
-  --dark: #111214;
-  --red: #ed2638;
-  --gray: #777979;
-  --line: #d6d5d0;
-  --white: #fff;
-}
-
-* { margin: 0; padding: 0; box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
-
-body {
-  background: var(--bg);
-  color: var(--dark);
-  font-family: 'Space Grotesk', sans-serif;
-  overflow-x: hidden;
-}
-
-a { color: inherit; text-decoration: none; }
-button, input, select { font: inherit; }
-
-.nav {
-  height: 78px;
-  padding: 0 7%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  position: fixed;
-  inset: 0 0 auto;
-  z-index: 100;
-  background: rgba(241,240,236,.9);
-  backdrop-filter: blur(15px);
-  border-bottom: 1px solid var(--line);
-}
-
-.logo {
-  font: 900 28px 'Barlow Condensed', sans-serif;
-  letter-spacing: -1px;
-}
-
-.logo span { color: var(--red); }
-
-.links {
-  display: flex;
-  align-items: center;
-  gap: 28px;
-  font-size: 12px;
-  font-weight: 700;
-  text-transform: uppercase;
-}
-
-.links a { transition: .2s; }
-.links a:hover { color: var(--red); }
-
-.links .nav-cta {
-  background: var(--red);
-  color: white;
-  padding: 13px 19px;
-}
-
-.menu {
-  display: none;
-  border: 0;
-  background: transparent;
-  font-size: 27px;
-  cursor: pointer;
-}
-
-.hero {
-  min-height: 100vh;
-  padding: 135px 7% 70px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  align-items: center;
-  gap: 30px;
-  overflow: hidden;
-  position: relative;
-}
-
-.hero::before {
-  content: "P4";
-  position: absolute;
-  z-index: 0;
-  right: -20px;
-  top: 90px;
-  font: 900 400px/.9 'Barlow Condensed', sans-serif;
-  color: #e7e5df;
-  pointer-events: none;
-}
-
-.hero-copy { position: relative; z-index: 2; }
-
-.eyebrow {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 3px;
-  text-transform: uppercase;
-}
-
-.eyebrow::before {
-  content: "";
-  height: 3px;
-  width: 28px;
-  background: var(--red);
-}
-
-.hero h1 {
-  margin: 26px 0;
-  font: 900 clamp(65px,9vw,132px)/.78 'Barlow Condensed', sans-serif;
-  letter-spacing: -3px;
-  text-transform: uppercase;
-}
-
-.hero h1 span {
-  color: var(--red);
-  display: block;
-}
-
-.hero h1 .stroke {
-  color: transparent;
-  -webkit-text-stroke: 2px var(--dark);
-}
-
-.hero-copy > p {
-  max-width: 430px;
-  color: #646563;
-  font-size: 15px;
-  line-height: 1.9;
-}
-
-.actions {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  margin-top: 29px;
-}
-
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 15px 21px;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 1px;
-  text-transform: uppercase;
-  border: 1px solid var(--dark);
-  cursor: pointer;
-  transition: .25s;
-}
-
-.btn-red {
-  color: white;
-  background: var(--red);
-  border-color: var(--red);
-}
-
-.btn-red:hover {
-  background: var(--dark);
-  border-color: var(--dark);
-  transform: translateY(-3px);
-}
-
-.btn-dark:hover { background: var(--dark); color: white; }
-
-.hero-bottom {
-  display: flex;
-  gap: 30px;
-  margin-top: 42px;
-}
-
-.hero-bottom strong {
-  display: block;
-  font: 800 31px 'Barlow Condensed', sans-serif;
-}
-
-.hero-bottom small {
-  display: block;
-  color: var(--gray);
-  font-size: 10px;
-  margin-top: 3px;
-  text-transform: uppercase;
-}
-
-.hero-visual {
-  position: relative;
-  min-height: 520px;
-  display: grid;
-  place-items: center;
-  z-index: 1;
-}
-
-.visual-frame {
-  width: min(100%, 500px);
-  aspect-ratio: .91;
-  position: relative;
-  display: grid;
-  place-items: center;
-  background:
-    linear-gradient(135deg,#1a1b1e,#08090a);
-  overflow: hidden;
-}
-
-.visual-frame::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  opacity: .18;
-  background:
-    linear-gradient(#ffffff 1px,transparent 1px),
-    linear-gradient(90deg,#ffffff 1px,transparent 1px);
-  background-size: 28px 28px;
-}
-
-.visual-frame::after {
-  content: "";
-  position: absolute;
-  width: 300px;
-  height: 300px;
-  border-radius: 50%;
-  background: var(--red);
-  filter: blur(110px);
-  opacity: .25;
-}
-
-.ring {
-  position: absolute;
-  z-index: 2;
-  width: 72%;
-  aspect-ratio: 1;
-  border: 2px solid var(--red);
-  border-radius: 50%;
-  transform: rotateX(68deg) rotateZ(-25deg);
-  box-shadow: 0 0 35px #ed263855, inset 0 0 30px #ed263822;
-}
-
-.ring.two {
-  width: 60%;
-  border-color: #fff;
-  border-style: dashed;
-  transform: rotateX(68deg) rotateZ(30deg);
-  animation: spinA 16s linear infinite;
-}
-
-.ring.three {
-  width: 85%;
-  border-color: #ed263899;
-  transform: rotateY(68deg) rotateZ(20deg);
-  animation: spinB 19s linear infinite;
-}
-
-@keyframes spinA {
-  to { transform: rotateX(68deg) rotateZ(390deg); }
-}
-
-@keyframes spinB {
-  to { transform: rotateY(68deg) rotateZ(380deg); }
-}
-
-.phantom-core {
-  position: relative;
-  z-index: 3;
-  width: 150px;
-  height: 150px;
-  display: grid;
-  place-items: center;
-  animation: hover 4s ease-in-out infinite;
-}
-
-@keyframes hover {
-  0%,100% { transform: translateY(0) rotate(-5deg); }
-  50% { transform: translateY(-16px) rotate(5deg); }
-}
-
-.core-shape {
-  position: absolute;
-  inset: 0;
-  border: 3px solid white;
-  transform: rotate(45deg);
-  box-shadow: 0 0 28px #ed263855;
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Arial,sans-serif;
 }
 
-.core-shape.two {
-  inset: 20px;
-  border-color: var(--red);
-  transform: rotateX(60deg) rotateZ(20deg);
-  animation: spinA 10s linear infinite;
+body{
+    background:#140606;
+    color:#fff;
 }
 
-.core-shape.three {
-  inset: 38px;
-  border-color: white;
-  transform: rotateY(60deg) rotateZ(40deg);
+.container{
+    display:flex;
+    min-height:100vh;
 }
 
-.core-dot {
-  width: 33px;
-  height: 33px;
-  border-radius: 50%;
-  background: white;
-  box-shadow: 0 0 20px white, 0 0 50px var(--red);
+.demo{
+    width:70%;
+    background:#111;
 }
 
-.frame-label {
-  position: absolute;
-  z-index: 5;
-  color: white;
-  font-size: 9px;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  padding: 12px;
-  border: 1px solid #ffffff45;
-  background: #111214b8;
+iframe{
+    width:100%;
+    height:100vh;
+    border:none;
 }
 
-.frame-label b { color: #ff5967; }
-.frame-label.one { top: 8%; left: 5%; }
-.frame-label.two { right: 5%; bottom: 10%; }
-.frame-label.three { bottom: 8%; left: 5%; }
-
-.vertical-label {
-  position: absolute;
-  right: -16px;
-  top: 50%;
-  transform: translateY(-50%);
-  writing-mode: vertical-rl;
-  font: 700 10px 'Space Grotesk', sans-serif;
-  letter-spacing: 4px;
-}
-
-.marquee {
-  overflow: hidden;
-  background: var(--red);
-  color: white;
-  padding: 16px 0;
-  transform: rotate(-1deg) scale(1.02);
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  gap: 28px;
-  animation: move 24s linear infinite;
-  font: 800 24px 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
-}
-
-.marquee-track span { white-space: nowrap; }
-
-@keyframes move {
-  to { transform: translateX(-50%); }
-}
-
-.section { padding: 100px 7%; }
-
-.section-heading {
-  display: flex;
-  align-items: end;
-  justify-content: space-between;
-  gap: 25px;
-  margin-bottom: 42px;
-}
-
-.section-heading h2 {
-  margin-top: 15px;
-  font: 900 clamp(44px,6vw,75px)/.9 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
-}
-
-.section-heading > p {
-  max-width: 340px;
-  color: var(--gray);
-  font-size: 14px;
-  line-height: 1.8;
-}
-
-.training-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 14px;
-}
-
-.training-card {
-  background: white;
-  padding: 27px;
-  min-height: 290px;
-  border: 1px solid var(--line);
-  position: relative;
-  overflow: hidden;
-  transition: .3s;
-}
-
-.training-card:hover {
-  transform: translateY(-6px);
-  border-color: var(--red);
-}
-
-.training-card .number {
-  font-size: 10px;
-  color: var(--red);
-  font-weight: 700;
-  letter-spacing: 2px;
-}
-
-.training-icon {
-  margin: 30px 0 20px;
-  font-size: 38px;
-  color: var(--red);
-}
-
-.training-card h3 {
-  font: 800 28px/.95 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
-}
-
-.training-card p {
-  margin-top: 14px;
-  color: #6e706f;
-  font-size: 13px;
-  line-height: 1.8;
-}
-
-.training-card a {
-  display: inline-block;
-  margin-top: 20px;
-  font-size: 10px;
-  font-weight: 700;
-  color: var(--red);
-}
-
-.training-card::after {
-  content: "";
-  position: absolute;
-  width: 90px;
-  height: 90px;
-  right: -50px;
-  bottom: -50px;
-  border: 1px solid #ed263833;
-  transform: rotate(45deg);
-}
-
-.experience {
-  background: var(--dark);
-  color: white;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 65px;
-  align-items: center;
-}
-
-.experience-art {
-  min-height: 390px;
-  display: grid;
-  place-items: center;
-  background:
-    radial-gradient(circle at center,#ed263833,transparent 55%),
-    #18191c;
-  position: relative;
-  overflow: hidden;
+.right{
+    width:30%;
+    padding:30px 22px;
+    background:linear-gradient(180deg,#2b0000,#0d0000);
+    display:flex;
+    align-items:center;
+    justify-content:center;
 }
 
-.experience-art::before,
-.experience-art::after {
-  content: "";
-  position: absolute;
-  width: 220px;
-  height: 220px;
-  border: 2px solid var(--red);
-  transform: rotate(45deg);
-  animation: spinA 15s linear infinite;
+.box{
+    width:100%;
+    background:#0b0b0b;
+    border:1px solid #ff2d2d;
+    border-radius:22px;
+    padding:26px 20px;
+    text-align:center;
+    box-shadow:0 0 30px rgba(255,0,0,.35);
 }
 
-.experience-art::after {
-  width: 155px;
-  height: 155px;
-  border-color: white;
-  animation-direction: reverse;
+.badge{
+    display:inline-block;
+    background:#ff2d2d;
+    color:#fff;
+    padding:10px 22px;
+    border-radius:30px;
+    font-weight:bold;
+    margin-bottom:18px;
 }
 
-.art-text {
-  position: relative;
-  z-index: 2;
-  font: 900 80px 'Barlow Condensed', sans-serif;
-  color: white;
+h1{
+    color:#ff4040;
+    font-size:36px;
+    text-transform:uppercase;
+    margin-bottom:15px;
 }
 
-.art-text span { color: var(--red); }
-
-.experience-copy h2 {
-  margin: 22px 0;
-  font: 900 clamp(45px,5vw,70px)/.9 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
-}
-
-.experience-copy > p {
-  color: #a5a6a9;
-  font-size: 14px;
-  line-height: 1.9;
-}
-
-.feature-list {
-  list-style: none;
-  margin: 25px 0;
-}
-
-.feature-list li {
-  border-bottom: 1px solid #ffffff20;
-  padding: 13px 0;
-  font-size: 13px;
-}
-
-.feature-list li::before {
-  content: "✦";
-  color: var(--red);
-  margin-right: 12px;
-}
-
-.pricing-grid {
-  display: grid;
-  grid-template-columns: repeat(3,1fr);
-  gap: 15px;
-}
-
-.price-card {
-  background: white;
-  padding: 30px 26px;
-  border: 1px solid var(--line);
-}
-
-.price-card.featured {
-  background: var(--dark);
-  color: white;
-  border-color: var(--red);
-  transform: translateY(-8px);
-}
-
-.plan-tag {
-  font-size: 10px;
-  letter-spacing: 2px;
-  font-weight: 700;
-  color: var(--red);
-}
-
-.price-card h3 {
-  margin-top: 22px;
-  font: 800 35px 'Barlow Condensed', sans-serif;
-}
-
-.price-card > p {
-  font-size: 12px;
-  color: var(--gray);
-  margin-top: 5px;
-}
-
-.price {
-  margin: 24px 0;
-  font: 900 50px 'Barlow Condensed', sans-serif;
-}
-
-.price small {
-  font: 12px 'Space Grotesk', sans-serif;
-  color: var(--gray);
-}
-
-.price-card ul { list-style: none; margin: 25px 0; }
-
-.price-card li {
-  padding: 12px 0;
-  font-size: 12px;
-  border-bottom: 1px solid var(--line);
-}
-
-.price-card.featured li { border-color: #ffffff20; }
-
-.price-card li::before {
-  content: "✓";
-  color: var(--red);
-  margin-right: 10px;
-}
-
-.price-card .btn { width: 100%; }
-
-.bmi-section {
-  background: #e5e3dd;
+.sub{
+    color:#ddd;
+    line-height:1.6;
+    margin-bottom:24px;
+    font-size:17px;
 }
 
-.bmi-grid {
-  display: grid;
-  grid-template-columns: .9fr 1.1fr;
-  gap: 65px;
-  align-items: center;
+.features{
+    display:grid;
+    gap:14px;
+    margin:24px 0;
 }
 
-.bmi-copy h2 {
-  margin: 22px 0;
-  font: 900 clamp(45px,6vw,70px)/.9 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
+.feature{
+    background:linear-gradient(90deg,#1b1b1b,#3b0000);
+    border:1px solid rgba(255,50,50,.6);
+    border-radius:14px;
+    padding:15px;
+    font-size:18px;
+    font-weight:bold;
 }
 
-.bmi-copy p {
-  max-width: 420px;
-  color: #696a68;
-  font-size: 14px;
-  line-height: 1.9;
+.feature span{
+    color:#ff4d4d;
 }
 
-.calculator {
-  background: white;
-  border: 1px solid #d4d2cb;
-  padding: 30px;
+.website-row{
+    display:flex;
+    justify-content:space-between;
+    margin-top:18px;
+    font-weight:bold;
+    gap:10px;
+    flex-wrap:wrap;
 }
 
-.field { margin-bottom: 20px; }
-
-.field label {
-  display: block;
-  margin-bottom: 9px;
-  font-size: 12px;
-  font-weight: 700;
+.website-row a{
+    text-decoration:none;
 }
 
-.field input, .field select {
-  width: 100%;
-  padding: 14px;
-  background: #f7f7f5;
-  border: 1px solid #d5d5d0;
-  outline: none;
-  border-radius: 0;
-  color: var(--dark);
+.website{
+    color:#25D366;
 }
 
-.field input:focus, .field select:focus { border-color: var(--red); }
-
-.result {
-  display: none;
-  margin-top: 20px;
-  padding: 20px;
-  border-left: 3px solid var(--red);
-  background: #ed26380a;
+.whatsapp-small{
+    color:#ff4d4d;
 }
 
-.result h3 {
-  font: 800 34px 'Barlow Condensed', sans-serif;
+.cta{
+    display:block;
+    margin-top:24px;
+    background:#25D366;
+    color:#fff;
+    text-decoration:none;
+    padding:18px;
+    border-radius:15px;
+    font-size:22px;
+    font-weight:bold;
+    transition:.3s;
+    box-shadow:0 0 18px rgba(37,211,102,.4);
 }
 
-.result p {
-  font-size: 12px;
-  line-height: 1.7;
-  margin-top: 7px;
-  color: #656665;
+.cta:hover{
+    background:#1ebe5d;
+    transform:scale(1.03);
 }
 
-.contact {
-  padding: 110px 7%;
-  text-align: center;
-  background: var(--red);
-  color: white;
-  position: relative;
-  overflow: hidden;
+.trust{
+    margin-top:18px;
+    color:#ccc;
+    line-height:1.7;
 }
 
-.contact::before {
-  content: "PHANTOM";
-  position: absolute;
-  bottom: -50px;
-  left: 50%;
-  transform: translateX(-50%);
-  font: 900 200px/.9 'Barlow Condensed', sans-serif;
-  color: #ffffff0d;
-  white-space: nowrap;
+.footer{
+    margin-top:20px;
+    color:#888;
+    font-size:12px;
 }
 
-.contact .eyebrow { justify-content: center; }
-.contact .eyebrow::before { background: white; }
+/* MOBILE */
+@media (max-width:768px){
 
-.contact h2 {
-  position: relative;
-  margin: 25px 0;
-  font: 900 clamp(55px,9vw,110px)/.8 'Barlow Condensed', sans-serif;
-  text-transform: uppercase;
+.container{
+    flex-direction:column-reverse; /* Contact first, Demo below */
 }
 
-.contact p {
-  position: relative;
-  max-width: 480px;
-  margin: 25px auto;
-  font-size: 14px;
-  line-height: 1.8;
-  color: #ffe7e8;
+.demo,
+.right{
+    width:100%;
 }
 
-.contact .btn {
-  position: relative;
-  background: white;
-  color: var(--dark);
-  border-color: white;
+iframe{
+    height:500px;
 }
-
-.contact .btn:hover { background: var(--dark); color: white; }
 
-footer {
-  padding: 27px 7%;
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  gap: 20px;
-  font-size: 11px;
-  color: #777;
+.right{
+    padding:20px;
 }
 
-footer strong {
-  font: 900 20px 'Barlow Condensed', sans-serif;
-  color: var(--dark);
+h1{
+    font-size:28px;
 }
 
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity .7s ease, transform .7s ease;
+.sub{
+    font-size:16px;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.feature{
+    font-size:16px;
 }
 
-@media(max-width: 900px) {
-  .hero { grid-template-columns: 1fr; }
-  .hero-copy { text-align: center; }
-  .hero-copy .eyebrow { justify-content: center; }
-  .hero-copy > p { margin: auto; }
-  .actions, .hero-bottom { justify-content: center; }
-  .hero-visual { min-height: 440px; }
-  .visual-frame { max-width: 440px; }
-  .training-grid, .pricing-grid { grid-template-columns: repeat(2,1fr); }
-  .experience, .bmi-grid { grid-template-columns: 1fr; }
-  .section-heading { align-items: flex-start; flex-direction: column; }
+.cta{
+    font-size:20px;
+    padding:16px;
 }
 
-@media(max-width: 620px) {
-  .nav { height: 70px; padding: 0 5%; }
-  .menu { display: block; }
-  .links {
-    display: none;
-    position: absolute;
-    top: 70px;
-    left: 0;
-    right: 0;
-    padding: 24px 5%;
-    background: var(--bg);
-    flex-direction: column;
-    align-items: stretch;
-    gap: 21px;
-    border-bottom: 1px solid var(--line);
-  }
-  .links.open { display: flex; }
-  .links .nav-cta { text-align: center; }
-  .hero { padding: 120px 5% 55px; }
-  .hero h1 { letter-spacing: -1px; }
-  .hero-bottom { gap: 20px; }
-  .hero-bottom strong { font-size: 25px; }
-  .hero-visual { min-height: 350px; }
-  .visual-frame { width: 100%; }
-  .ring { width: 72%; }
-  .phantom-core { transform: scale(.8); }
-  .frame-label { font-size: 7px; padding: 8px; }
-  .section { padding: 75px 5%; }
-  .training-grid, .pricing-grid { grid-template-columns: 1fr; }
-  .training-card { min-height: 255px; }
-  .price-card.featured { transform: none; }
-  .experience-art { min-height: 290px; }
-  .art-text { font-size: 65px; }
-  .calculator { padding: 21px; }
-  .contact { padding: 85px 5%; }
-  .contact::before { font-size: 100px; bottom: 0; }
-  footer { padding: 25px 5%; }
+.website-row{
+    flex-direction:column;
+    align-items:center;
+    gap:12px;
 }
 
-@media(prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: .01ms !important;
-    animation-iteration-count: 1 !important;
-    scroll-behavior: auto !important;
-    transition-duration: .01ms !important;
-  }
-  .reveal { opacity: 1; transform: none; }
 }
 </style>
+
 </head>
 
 <body>
 
-<header class="nav">
-  <a href="#home" class="logo">PHANTOM<span>4D.</span></a>
-  <button class="menu" id="menu" aria-label="Toggle menu"
-          aria-expanded="false">☰</button>
+<div class="container">
 
-  <nav class="links" id="links">
-    <a href="#home">Home</a>
-    <a href="#training">Training</a>
-    <a href="#experience">Experience</a>
-    <a href="#membership">Membership</a>
-    <a href="#bmi">BMI Calculator</a>
-    <a href="#contact" class="nav-cta">JOIN PHANTOM ↗</a>
-  </nav>
-</header>
-
-<main>
-<section class="hero" id="home">
-  <div class="hero-copy">
-    <span class="eyebrow">The future of physical performance</span>
-
-    <h1>
-      BREAK<br>
-      <span>THE</span>
-      <span class="stroke">LIMIT.</span>
-    </h1>
-
-    <p>
-      Welcome to PHANTOM 4D. An immersive fitness concept for people
-      who want to train with purpose, build real strength and move beyond
-      yesterday's version of themselves.
-    </p>
-
-    <div class="actions">
-      <a href="#membership" class="btn btn-red">START YOUR EVOLUTION ↗</a>
-      <a href="#training" class="btn btn-dark">EXPLORE TRAINING</a>
+    <!-- Demo Section -->
+    <div class="demo">
+        <iframe src="https://www.iceexchange.in/"></iframe>
     </div>
 
-    <div class="hero-bottom">
-      <div><strong>4D</strong><small>Immersive concept</small></div>
-      <div><strong>06</strong><small>Training paths</small></div>
-      <div><strong>100%</strong><small>Focus on you</small></div>
+    <!-- Contact Section -->
+    <div class="right">
+
+        <div class="box">
+
+            <div class="badge">
+                VIP Manual ID Available
+            </div>
+
+            <h1>GET YOUR ID NOW</h1>
+
+            <p class="sub">
+                Fast manual ID service with easy deposit support.
+                New users can start quickly through WhatsApp.
+            </p>
+
+            <div class="features">
+
+                <div class="feature">
+                    Minimum Deposit:
+                    <span>₹100 Only</span>
+                </div>
+
+                <div class="feature">
+                    Welcome Bonus:
+                    <span>10%</span>
+                </div>
+
+                <div class="feature">
+                    Manual ID Support:
+                    <span>WhatsApp Only</span>
+                </div>
+
+                <div class="feature">
+                    Quick Help:
+                    <span>Deposit &amp; Withdrawal Support</span>
+                </div>
+
+            </div>
+
+            <div class="website-row">
+
+                <a class="website" href="https://www.iceexchange.in" target="_blank">
+                    🌐 www.iceexchange.in
+                </a>
+
+                <a class="whatsapp-small"
+                   href="https://wa.me/+447767776214
+                   target="_blank">
+                    💬 WhatsApp
+                </a>
+
+            </div>
+
+            <a class="cta"
+               href="https://wa.me/+447767776214?text=Hello%20I%20want%20new%20manual%20ID"
+               target="_blank">
+                📲 WhatsApp Now
+            </a>
+
+            <div class="trust">
+                ✅ Trusted Manual Support<br>
+                ✅ Simple Process<br>
+                ✅ Fast Response
+            </div>
+
+            <div class="footer">
+                18+ Only | Play Responsibly | Follow Your Local Laws | T&amp;C Apply
+            </div>
+
+        </div>
+
     </div>
-  </div>
 
-  <div class="hero-visual">
-    <div class="visual-frame">
-      <div class="ring"></div>
-      <div class="ring two"></div>
-      <div class="ring three"></div>
-
-      <div class="phantom-core">
-        <div class="core-shape"></div>
-        <div class="core-shape two"></div>
-        <div class="core-shape three"></div>
-        <div class="core-dot"></div>
-      </div>
-
-      <div class="frame-label one">SYSTEM <b>ONLINE</b></div>
-      <div class="frame-label two">PHANTOM / 4D</div>
-      <div class="frame-label three">POWER MODE: <b>ACTIVE</b></div>
-    </div>
-    <div class="vertical-label">TRAIN BEYOND THE ORDINARY — 2026</div>
-  </div>
-</section>
-
-<div class="marquee">
-  <div class="marquee-track">
-    <span>✦ NO LIMITS</span><span>✦ NO EXCUSES</span>
-    <span>✦ MORE POWER</span><span>✦ ENTER PHANTOM</span>
-    <span>✦ NO LIMITS</span><span>✦ NO EXCUSES</span>
-    <span>✦ MORE POWER</span><span>✦ ENTER PHANTOM</span>
-  </div>
 </div>
-
-<section class="section" id="training">
-  <div class="section-heading reveal">
-    <div>
-      <span class="eyebrow">Choose your discipline</span>
-      <h2>BUILT FOR<br>YOUR NEXT LEVEL.</h2>
-    </div>
-    <p>Six different ways to challenge yourself, build consistency and move toward your personal goals.</p>
-  </div>
-
-  <div class="training-grid">
-    <article class="training-card reveal">
-      <span class="number">TRAINING 01</span>
-      <div class="training-icon">✳</div>
-      <h3>IRON CULTURE</h3>
-      <p>Progressive resistance training for strength, muscle development and confidence.</p>
-      <a href="#membership">EXPLORE PROGRAM ↗</a>
-    </article>
-
-    <article class="training-card reveal">
-      <span class="number">TRAINING 02</span>
-      <div class="training-icon">ϟ</div>
-      <h3>REDLINE CONDITIONING</h3>
-      <p>Dynamic conditioning sessions to challenge endurance, coordination and stamina.</p>
-      <a href="#membership">EXPLORE PROGRAM ↗</a>
-    </article>
-
-    <article class="training-card reveal">
-      <span class="number">TRAINING 03</span>
-      <div class="training-icon">◈</div>
-      <h3>BODY REBUILD</h3>
-      <p>Pair a structured workout routine with sustainable habits and measurable goals.</p>
-      <a href="#membership">EXPLORE PROGRAM ↗</a>
-    </article>
-
-    <article class="training-card reveal">
-      <span class="number">TRAINING 04</span>
-      <div class="training-icon">◎</div>
-      <h3>MOTION CONTROL</h3>
-      <p>Build mobility, balance and movement control into your weekly routine.</p>
-      <a href="#membership">EXPLORE PROGRAM ↗</a>
-    </article>
-
-    <article class="training-card reveal">
-      <span class="number">TRAINING 05</span>
-      <div class="training-icon">⌁</div>
-      <h3>PERSONAL COACHING</h3>
-      <p>Individual guidance designed around your fitness experience and priorities.</p>
-      <a href="#contact">MEET YOUR COACH ↗</a>
-    </article>
-
-    <article class="training-card reveal">
-      <span class="number">TRAINING 06</span>
-      <div class="training-icon">⟡</div>
-      <h3>RECOVERY ROOM</h3>
-      <p>Give rest, mobility and recovery a place in your training strategy.</p>
-      <a href="#contact">DISCOVER MORE ↗</a>
-    </article>
-  </div>
-</section>
-
-<section class="section experience" id="experience">
-  <div class="experience-art reveal">
-    <div class="art-text">P<span>4</span>D</div>
-  </div>
-
-  <div class="experience-copy reveal">
-    <span class="eyebrow">A different state of training</span>
-    <h2>THIS IS<br>YOUR ARENA.</h2>
-    <p>
-      PHANTOM 4D brings bold design and a performance-focused mindset
-      together in one environment. Build a routine that works for you,
-      stay consistent and keep pushing your personal best.
-    </p>
-
-    <ul class="feature-list">
-      <li>Futuristic gym atmosphere</li>
-      <li>Strength and functional training</li>
-      <li>Options for beginners and experienced members</li>
-      <li>Personal coaching consultations</li>
-      <li>Goal-focused fitness guidance</li>
-    </ul>
-
-    <a href="#contact" class="btn btn-red">ENTER THE ARENA ↗</a>
-  </div>
-</section>
-
-<section class="section" id="membership">
-  <div class="section-heading reveal">
-    <div>
-      <span class="eyebrow">Your access starts here</span>
-      <h2>CHOOSE<br>YOUR LEVEL.</h2>
-    </div>
-    <p>Choose the membership that fits your routine, your needs and your ambition.</p>
-  </div>
-
-  <div class="pricing-grid">
-    <article class="price-card reveal">
-      <span class="plan-tag">LEVEL 01</span>
-      <h3>STARTER</h3>
-      <p>Build your foundation.</p>
-      <div class="price">$29<small> / month</small></div>
-      <ul>
-        <li>Gym floor access</li>
-        <li>Strength equipment</li>
-        <li>Locker facilities</li>
-        <li>Introductory orientation</li>
-      </ul>
-      <a href="#contact" class="btn btn-dark">SELECT STARTER</a>
-    </article>
-
-    <article class="price-card featured reveal">
-      <span class="plan-tag">LEVEL 02 / POPULAR</span>
-      <h3>PERFORMANCE</h3>
-      <p>Make every session count.</p>
-      <div class="price">$59<small> / month</small></div>
-      <ul>
-        <li>Everything in Starter</li>
-        <li>Group training options</li>
-        <li>Progress reviews</li>
-        <li>Training plan consultation</li>
-      </ul>
-      <a href="#contact" class="btn btn-red">SELECT PERFORMANCE</a>
-    </article>
-
-    <article class="price-card reveal">
-      <span class="plan-tag">LEVEL 03</span>
-      <h3>ELITE</h3>
-      <p>A more personal approach.</p>
-      <div class="price">$99<small> / month</small></div>
-      <ul>
-        <li>Everything in Performance</li>
-        <li>Personal coaching options</li>
-        <li>Customized workout plan</li>
-        <li>Priority consultations</li>
-      </ul>
-      <a href="#contact" class="btn btn-dark">SELECT ELITE</a>
-    </article>
-  </div>
-
-  <p style="font-size:11px;color:var(--gray);margin-top:22px">
-    Demo prices in USD. Replace them with your gym's real membership rates and conditions.
-  </p>
-</section>
-
-<section class="section bmi-section" id="bmi">
-  <div class="bmi-grid">
-    <div class="bmi-copy reveal">
-      <span class="eyebrow">Your personal fitness check</span>
-      <h2>KNOW YOUR<br>STARTING POINT.</h2>
-      <p>
-        Calculate your Body Mass Index using your height and weight.
-        BMI is a general screening measure, not a diagnosis or a complete
-        measure of fitness, muscle mass or health.
-      </p>
-    </div>
-
-    <div class="calculator reveal">
-      <form id="bmiForm">
-        <div class="field">
-          <label for="unit">Measurement system</label>
-          <select id="unit">
-            <option value="metric">Metric — kg / cm</option>
-            <option value="imperial">Imperial — lb / inches</option>
-          </select>
-        </div>
-
-        <div class="field">
-          <label for="weight" id="weightLabel">Weight (kg)</label>
-          <input id="weight" type="number" min="1" max="500"
-                 step="any" placeholder="Enter your weight" required>
-        </div>
-
-        <div class="field">
-          <label for="height" id="heightLabel">Height (cm)</label>
-          <input id="height" type="number" min="1" max="300"
-                 step="any" placeholder="Enter your height" required>
-        </div>
-
-        <button class="btn btn-red" type="submit" style="width:100%">
-          CALCULATE BMI ↗
-        </button>
-      </form>
-
-      <div class="result" id="result" aria-live="polite">
-        <h3 id="bmiValue"></h3>
-        <p id="bmiCategory"></p>
-        <p id="bmiAdvice"></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="contact" id="contact">
-  <span class="eyebrow">The next move is yours</span>
-  <h2>OWN YOUR<br>EVOLUTION.</h2>
-  <p>
-    Ready to train at PHANTOM 4D? Contact our team to ask about memberships,
-    coaching or arranging your first visit.
-  </p>
-  <a class="btn" href="mailto:hello@phantom4d.example?subject=PHANTOM%204D%20Membership%20Enquiry">
-    JOIN THE PHANTOM ↗
-  </a>
-</section>
-</main>
-
-<footer>
-  <strong>PHANTOM<span style="color:var(--red)">4D.</span></strong>
-  <span>BUILT TO BREAK THE ORDINARY.</span>
-  <span>© <span id="year"></span> PHANTOM FITNESS</span>
-</footer>
-
-<script>
-const menu = document.getElementById('menu');
-const links = document.getElementById('links');
-
-menu.addEventListener('click', () => {
-  const opened = links.classList.toggle('open');
-  menu.setAttribute('aria-expanded', String(opened));
-  menu.textContent = opened ? '✕' : '☰';
-});
-
-links.querySelectorAll('a').forEach(link => {
-  link.addEventListener('click', () => {
-    links.classList.remove('open');
-    menu.setAttribute('aria-expanded', 'false');
-    menu.textContent = '☰';
-  });
-});
-
-document.getElementById('year').textContent = new Date().getFullYear();
-
-const observer = new IntersectionObserver(entries => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.classList.add('visible');
-      observer.unobserve(entry.target);
-    }
-  });
-}, { threshold: 0.12 });
-
-document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-
-const unit = document.getElementById('unit');
-const weight = document.getElementById('weight');
-const height = document.getElementById('height');
-const result = document.getElementById('result');
-
-unit.addEventListener('change', () => {
-  const imperial = unit.value === 'imperial';
-
-  document.getElementById('weightLabel').textContent =
-    imperial ? 'Weight (lb)' : 'Weight (kg)';
-  document.getElementById('heightLabel').textContent =
-    imperial ? 'Height (inches)' : 'Height (cm)';
-
-  weight.placeholder = imperial ? 'e.g. 160' : 'e.g. 70';
-  height.placeholder = imperial ? 'e.g. 69' : 'e.g. 175';
-  weight.max = imperial ? 1100 : 500;
-  height.max = imperial ? 120 : 300;
-
-  result.style.display = 'none';
-});
-
-document.getElementById('bmiForm').addEventListener('submit', event => {
-  event.preventDefault();
-
-  const w = Number(weight.value);
-  const h = Number(height.value);
-  const imperial = unit.value === 'imperial';
-
-  if (!Number.isFinite(w) || !Number.isFinite(h) || w <= 0 || h <= 0) {
-    alert('Enter a valid positive weight and height.');
-    return;
-  }
-
-  const weightKg = imperial ? w * 0.45359237 : w;
-  const heightM = imperial ? h * 0.0254 : h / 100;
-
-  if (weightKg > 500 || heightM < 0.5 || heightM > 3) {
-    alert('Please check your measurements and try again.');
-    return;
-  }
-
-  const bmi = weightKg / (heightM * heightM);
-
-  if (!Number.isFinite(bmi) || bmi < 5 || bmi > 100) {
-    alert('Please check your measurements and try again.');
-    return;
-  }
-
-  let category;
-  let advice;
-
-  if (bmi < 18.5) {
-    category = 'Below the standard adult BMI range';
-    advice = 'Consider discussing nutrition and fitness goals with a qualified health professional.';
-  } else if (bmi < 25) {
-    category = 'Within the standard adult BMI range';
-    advice = 'Keep building sustainable habits around movement, nutrition and recovery.';
-  } else if (bmi < 30) {
-    category = 'Above the standard adult BMI range';
-    advice = 'BMI does not distinguish muscle from fat. Consider your overall health and personal goals.';
-  } else {
-    category = 'Higher adult BMI range';
-    advice = 'A qualified health professional can help interpret this result in the context of your health.';
-  }
-
-  document.getElementById('bmiValue').textContent = 'BMI: ' + bmi.toFixed(1);
-  document.getElementById('bmiCategory').textContent = category;
-  document.getElementById('bmiAdvice').textContent = advice;
-
-  result.style.display = 'block';
-});
-</script>
 
 </body>
 </html>
